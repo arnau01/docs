@@ -1,0 +1,104 @@
+---
+title: 'Schedule Job'
+api: 'POST /api/lead-finding/schedule_job'
+description: 'Schedule a new lead finding job'
+---
+
+# Schedule Job
+
+## API Reference
+
+Creates and schedules a new lead finding job.
+
+```bash
+POST /api/lead-finding/schedule_job
+```
+
+## Request Body
+
+```json
+{
+  "personas": "array",
+  "selected_fields": "string[]",
+  "domains": "string[]"
+}
+```
+
+### Properties
+
+<ParamField body="personas" type="array" required>
+  Array of persona configurations for lead finding
+</ParamField>
+
+<ParamField body="selected_fields" type="string[]" required>
+  Array of fields to collect for each lead. Must be one of:
+  - first_name
+  - last_name
+  - title
+  - email
+  - country
+  - salutation
+  - email_or_linkedin_url
+  - linkedin_url
+  - gender
+  - preferred_language
+</ParamField>
+
+<ParamField body="domains" type="string[]" required>
+  Array of target domains to find leads from
+</ParamField>
+
+## Response
+
+```json
+{
+  "message": "Job scheduled successfully",
+  "job_id": "string"
+}
+```
+
+### Properties
+
+<ResponseField name="message" type="string">
+  Success message confirming job creation
+</ResponseField>
+
+<ResponseField name="job_id" type="string">
+  Unique identifier for the newly created job
+</ResponseField>
+
+## Status Codes
+
+<ResponseField name="200" type="OK">
+  Successfully scheduled job
+</ResponseField>
+
+<ResponseField name="400" type="Bad Request">
+  Missing required fields or invalid field values
+</ResponseField>
+
+<ResponseField name="401" type="Unauthorized">
+  Invalid or missing API key
+</ResponseField>
+
+<ResponseField name="500" type="Internal Server Error">
+  Server error while scheduling job
+</ResponseField>
+
+## Example Request
+
+```bash
+curl -X POST https://your-domain.com/api/lead-finding/schedule_job \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "personas": [
+      {
+        "title": "Software Engineer",
+        "seniority": "Senior"
+      }
+    ],
+    "selected_fields": ["first_name", "last_name", "email", "title"],
+    "domains": ["example.com", "company.com"]
+  }'
+``` 

@@ -75,11 +75,12 @@
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Lead Finding API",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/lead-finding/introduction",
+        "api-reference/lead-finding/get-all-jobs",
+        "api-reference/lead-finding/get-job-details",
+        "api-reference/lead-finding/schedule-job"
       ]
     }
   ],

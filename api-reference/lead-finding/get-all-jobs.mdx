@@ -1,0 +1,69 @@
+---
+title: 'Get All Jobs'
+api: 'GET /api/lead-finding/get_all_jobs'
+description: 'Retrieve all lead finding jobs for the authenticated user'
+---
+
+# Get All Jobs
+
+## API Reference
+
+Returns a list of all lead finding jobs associated with the authenticated user, ordered by creation date (newest first).
+
+```bash
+GET /api/lead-finding/get_all_jobs
+```
+
+## Response
+
+Returns an array of job objects with the following properties:
+
+```json
+{
+  "jobs": [
+    {
+      "job_id": "string",
+      "name": "string",
+      "status": "string",
+      "created_at": "string (ISO 8601)",
+      "complete_leads_sheet": "string | null"
+    }
+  ]
+}
+```
+
+### Properties
+
+<ResponseField name="job_id" type="string" required>
+  Unique identifier for the job
+</ResponseField>
+
+<ResponseField name="name" type="string" required>
+  Name of the job. Defaults to "Job {first 6 chars of job_id}" if not specified
+</ResponseField>
+
+<ResponseField name="status" type="string" required>
+  Current status of the job (e.g., "ongoing", "completed")
+</ResponseField>
+
+<ResponseField name="created_at" type="string" required>
+  ISO 8601 formatted timestamp of when the job was created
+</ResponseField>
+
+<ResponseField name="complete_leads_sheet" type="string | null">
+  URL to the completed leads sheet, if available
+</ResponseField>
+
+## Status Codes
+
+<ResponseField name="200" type="OK">
+  Successfully retrieved jobs
+</ResponseField>
+
+<ResponseField name="401" type="Unauthorized">
+  Invalid or missing API key
+</ResponseField>
+
+<ResponseField name="500" type="Internal Server Error">
+  Server error while fetching jobs
+</ResponseField> 

@@ -1,0 +1,94 @@
+---
+title: 'Get Job Details'
+api: 'GET /api/lead-finding/get_job_details'
+description: 'Retrieve detailed information about a specific lead finding job'
+---
+
+# Get Job Details
+
+## API Reference
+
+Returns detailed information about a specific lead finding job.
+
+```bash
+GET /api/lead-finding/get_job_details?job_id={job_id}
+```
+
+## Parameters
+
+<ParamField query="job_id" type="string" required>
+  The unique identifier of the job to retrieve
+</ParamField>
+
+## Response
+
+Returns a detailed job object with the following properties:
+
+```json
+{
+  "job_id": "string",
+  "name": "string",
+  "personas": "array",
+  "selected_fields": "string[]",
+  "domains": "string[]",
+  "created_at": "string (ISO 8601)",
+  "status": "string",
+  "complete_leads_sheet": "string | null"
+}
+```
+
+### Properties
+
+<ResponseField name="job_id" type="string" required>
+  Unique identifier for the job
+</ResponseField>
+
+<ResponseField name="name" type="string" required>
+  Name of the job. Defaults to "Job {first 6 chars of job_id}" if not specified
+</ResponseField>
+
+<ResponseField name="personas" type="array" required>
+  Array of persona configurations used for lead finding
+</ResponseField>
+
+<ResponseField name="selected_fields" type="string[]" required>
+  Array of fields selected for lead data collection
+</ResponseField>
+
+<ResponseField name="domains" type="string[]" required>
+  Array of target domains for lead finding
+</ResponseField>
+
+<ResponseField name="created_at" type="string" required>
+  ISO 8601 formatted timestamp of when the job was created
+</ResponseField>
+
+<ResponseField name="status" type="string" required>
+  Current status of the job (e.g., "ongoing", "completed")
+</ResponseField>
+
+<ResponseField name="complete_leads_sheet" type="string | null">
+  URL to the completed leads sheet, if available
+</ResponseField>
+
+## Status Codes
+
+<ResponseField name="200" type="OK">
+  Successfully retrieved job details
+</ResponseField>
+
+<ResponseField name="400" type="Bad Request">
+  Missing or invalid job_id parameter
+</ResponseField>
+
+<ResponseField name="401" type="Unauthorized">
+  Invalid or missing API key
+</ResponseField>
+
+<ResponseField name="404" type="Not Found">
+  Job not found
+</ResponseField>
+
+<ResponseField name="500" type="Internal Server Error">
+  Server error while fetching job details
+</ResponseField> 
