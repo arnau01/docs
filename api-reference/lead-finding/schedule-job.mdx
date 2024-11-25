@@ -11,23 +11,31 @@ description: 'Schedule a new lead finding job'
 Creates and schedules a new lead finding job.
 
 ```bash
-POST /api/lead-finding/schedule_job
+POST https://app.throxy.com/api/lead-finding/schedule_job
+```
+
+## Authentication
+
+Include your API key in the request headers using the `x-api-key` header:
+
+```bash
+x-api-key: YOUR_API_KEY
 ```
 
 ## Request Body
 
 ```json
 {
-  "personas": "array",
-  "selected_fields": "string[]",
-  "domains": "string[]"
+  "personas": ["Software Engineer", "Developer", "Engineering Manager"],
+  "selected_fields": ["first_name", "last_name", "email"],
+  "domains": ["example.com", "company.com"]
 }
 ```
 
 ### Properties
 
-<ParamField body="personas" type="array" required>
-  Array of persona configurations for lead finding
+<ParamField body="personas" type="string[]" required>
+  Array of persona strings, ordered by priority (index 0 is highest priority). Each string represents a target role or position. The system will attempt to find leads matching these personas in order of priority.
 </ParamField>
 
 <ParamField body="selected_fields" type="string[]" required>
@@ -88,17 +96,24 @@ POST /api/lead-finding/schedule_job
 ## Example Request
 
 ```bash
-curl -X POST https://your-domain.com/api/lead-finding/schedule_job \
-  -H "Authorization: Bearer YOUR_API_KEY" \
+curl -X POST https://app.throxy.com/api/lead-finding/schedule_job \
+  -H "x-api-key: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "personas": [
-      {
-        "title": "Software Engineer",
-        "seniority": "Senior"
-      }
+      "Software Engineer",
+      "Full Stack Developer",
+      "Backend Developer"
     ],
     "selected_fields": ["first_name", "last_name", "email", "title"],
     "domains": ["example.com", "company.com"]
   }'
-``` 
+```
+
+The example above shows three personas in order of priority:
+1. "Software Engineer" (highest priority)
+2. "Full Stack Developer" (medium priority)
+3. "Backend Developer" (lowest priority)
+
+The system will attempt to find leads matching these personas in the specified order.
+  
