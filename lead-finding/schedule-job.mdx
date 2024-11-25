@@ -26,6 +26,7 @@ x-api-key: YOUR_API_KEY
 
 ```json
 {
+  "name": "Q4 Engineering Leads",
   "personas": ["Software Engineer", "Developer", "Engineering Manager"],
   "selected_fields": ["first_name", "last_name", "email"],
   "domains": ["example.com", "company.com"]
@@ -33,6 +34,10 @@ x-api-key: YOUR_API_KEY
 ```
 
 ### Properties
+
+<ParamField body="name" type="string" required>
+  A descriptive name for the job to help identify it later
+</ParamField>
 
 <ParamField body="personas" type="string[]" required>
   Array of persona strings, ordered by priority (index 0 is highest priority). Each string represents a target role or position. The system will attempt to find leads matching these personas in order of priority.
@@ -100,6 +105,7 @@ curl -X POST https://app.throxy.com/api/lead-finding/schedule_job \
   -H "x-api-key: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
+    "name": "Q4 Engineering Leads",
     "personas": [
       "Software Engineer",
       "Full Stack Developer",
